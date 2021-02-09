@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useState, useEffect } from "react";//modified
+import React from "react";//modified
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Signup from "./pages/Auth/Signup";
 import Login from "./pages/Auth/Login";
@@ -13,14 +13,14 @@ import ProtectedRoute from "./protectedRoute/ProtectedRoute";
 import { getCurrentUser } from "./api/profile";
 import { getLocalStorage } from "./helpers/localStorage";
 //new code below
-import io from "socket.io-client";
+//import io from "socket.io-client";
 
 
-const connOpt = {
+/* const connOpt = {
 	transpots: ["websocket"]
 }
 
-let socket = io("https://striveschool-api.herokuapp.com")
+let socket = io("https://striveschool-api.herokuapp.com") */
 
 
 
@@ -29,6 +29,7 @@ function App() {
 	const [me, setMe] = React.useState(null);
 	const [currentProfile, setCurrentProfile] = React.useState({});
 	const [submitUser, setSubmitUser] = React.useState(0);
+	
 
 	return (
 		<div className='App'>

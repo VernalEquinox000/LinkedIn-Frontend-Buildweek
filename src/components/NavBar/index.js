@@ -196,8 +196,10 @@ class NavBar extends React.Component {
 									<p>Jobs</p>
 								</Nav.Link>
 								<Nav.Link className='nav-link'>
+									<Link to="/message">
 									<SmsIcon />
-									<p>Messaging</p>
+										<p>Messaging</p>
+										</Link>
 								</Nav.Link>
 								<Nav.Link className='nav-link'>
 									<NotificationsIcon />
