@@ -15,14 +15,24 @@ function Message() {
     useEffect(() => {
         socket.on("bmsg", (msg) => setMessages((messages) => messages.concat(msg)))
 
-        socket.on("connect", () => consol.log("OOOON"))
+        socket.on("connect", () => console.log("OOOON"))
 
         return () => socket.removeAllListeners();
     }, []);
 
 
 
+
+    return (<>
+        <div className="Message">
+            <ul id="messages">MESSAGE HERE
+                {messages.map((msg, index) => (<li key={index} className={msg.user === username ? "myMsg" : "message"}>
+                    {msg.user} : {msg.message}
+                </li>))}
+            </ul>
+    </div>
+    </>)
+
 }
 
-
-export default Message;
+    export default Message;
