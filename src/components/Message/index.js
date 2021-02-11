@@ -13,6 +13,14 @@ function Message() {
     const [message, setMessage] = useState("")
     const [messages, setMessages] = useState([])
 
+
+   /*  getMessages = async(
+        fetch (`https://striveschool-api.herokuapp.com/api/messages/${username}`)
+    )
+ */
+
+
+
     useEffect(() => {
         socket.on("bmsg", (msg) => setMessages((messages) => messages.concat(msg)))
 
@@ -31,21 +39,42 @@ function Message() {
 
     const submitMessage = (e) => {
         e.preventDefault()
+        if (message != "") {
+            socket.emit("bmsg", {
+                user: username,
+                message: message
+            })
+
+            setMessage("")
+        }
     }
 
 
 
     return (
-        <>
-                <Container className="Message">
+        <><ul id="messages">MESSAGE HERE
+                {messages.map((msg, index) => (<li key={index} className={msg.user === username ? "myMsg" : "message"}>
+                    {msg.user} : {msg.message}
+                </li>))}
+        </ul>
+            
+            <form id="chat" onSubmit={submitMessage}>
+                <input autoComplete="off" value={username} onChange={handleUsername} />
+          <input autoComplete="off" value={message} onChange={handleMessage} />
+          <Button type="submit" className="rounded-0">
+            Send
+          </Button>
+        </form>
+            
+               {/*  <Container className="Message">
                     <Row>
                         <Col xs ={6}>
         <Form inline onSubmit={submitMessage}>
   <Form.Group controlId="formChat">
     <Form.Label>name</Form.Label>
-                <Form.Control type="text" placeholder="Enter name" onChange={handleUsername} />
+                                <Form.Control type="text" placeholder="Enter name" value={username} onChange={handleUsername} />
                 <Form.Label>message</Form.Label>
-                <Form.Control type="text" placeholder="Enter message" onChange={handleMessage}  />
+                                <Form.Control type="text" placeholder="Enter message" value={message}onChange={handleMessage}  />
                 
                 </Form.Group>
                 </Form>
@@ -53,14 +82,10 @@ function Message() {
                 <Button variant="primary" type="Submit">Send</Button>{' '}
         
         
-            <ul id="messages">MESSAGE HERE
-                {messages.map((msg, index) => (<li key={index} className={msg.user === username ? "myMsg" : "message"}>
-                    {msg.user} : {msg.message}
-                </li>))}
-                </ul>
+            
                 </Col>
                     </Row>
-                </Container>
+                </Container> */}
             
     </>)
 
