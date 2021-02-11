@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import { Container, Row } from "react-bootstrap";
 import Profile from "./pages/Profile";
+import Message from "./components/Message"
 import "./App.css";
 import ProtectedRoute from "./protectedRoute/ProtectedRoute";
 import { getCurrentUser } from "./api/profile";
@@ -52,6 +53,7 @@ function App() {
 					</Row>
 				</Container>
 				<ProtectedRoute path='/' exact component={Home} />
+				<Route path='/message' exact component={Message} />
 				<Route path='/auth/signup' exact component={Signup} />
 				<Route
 					path='/auth/login'

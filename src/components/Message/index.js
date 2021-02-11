@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";//modified
 import io from "socket.io-client";
-import {Form,Button} from "react-bootstrap"
+import {Container, Row, Col, Form,Button} from "react-bootstrap"
 
 const connOpt = {
 	transports: ["websocket"]
@@ -21,31 +21,47 @@ function Message() {
         return () => socket.removeAllListeners();
     }, []);
 
+    const handleUsername = (e) => {
+        setUsername(e.currentTarget.value)
+    }
+
+    const handleMessage= (e) => {
+        setMessage(e.currentTarget.value)
+    }
+
+    const submitMessage = (e) => {
+        e.preventDefault()
+    }
 
 
 
     return (
         <>
-            <div className="Message">
-        <Form>
-  <Form.Group controlId="formBasicEmail">
+                <Container className="Message">
+                    <Row>
+                        <Col xs ={6}>
+        <Form inline onSubmit={submitMessage}>
+  <Form.Group controlId="formChat">
     <Form.Label>name</Form.Label>
-                <Form.Control type="text" placeholder="Enter name" />
+                <Form.Control type="text" placeholder="Enter name" onChange={handleUsername} />
                 <Form.Label>message</Form.Label>
-                <Form.Control type="text" placeholder="Enter message" />
+                <Form.Control type="text" placeholder="Enter message" onChange={handleMessage}  />
                 
                 </Form.Group>
                 </Form>
 
-                <Button variant="primary">Primary</Button>{' '}
+                <Button variant="primary" type="Submit">Send</Button>{' '}
         
         
             <ul id="messages">MESSAGE HERE
                 {messages.map((msg, index) => (<li key={index} className={msg.user === username ? "myMsg" : "message"}>
                     {msg.user} : {msg.message}
                 </li>))}
-            </ul>
-    </div>
+                </ul>
+                </Col>
+                    </Row>
+                </Container>
+            
     </>)
 
 }

@@ -107,13 +107,13 @@ class NavBar extends React.Component {
 	showAuthNavBar = () => {
 		return (
 			<div>
-				<ShowSearchResult
+				{/* <ShowSearchResult
 					hideSearchBar={() =>
 						this.setState({ showSearchResult: false })
 					}
 					show={this.state.showSearchResult}
 					users={this.state.searchedUsers}
-				/>
+				/> */}
 				<AddFriendList
 					updateNavBar={() =>
 						this.setState({
